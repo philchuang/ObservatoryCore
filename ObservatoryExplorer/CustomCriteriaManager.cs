@@ -227,9 +227,13 @@ namespace Observatory.Explorer
                 try
                 {
                     var result = criteriaFunction.Call(scan, parents, scanList, bioSignals, geoSignals);
-                    if (result.Length > 0 && ((bool?)result[0]).GetValueOrDefault(false))
+                    if (result.Length == 3 && ((bool?)result[0]).GetValueOrDefault(false))
                     {
                         results.Add((result[1].ToString(), result[2].ToString(), false));
+                    }
+                    else if (result.Length == 2)
+                    {
+                        results.Add((result[0].ToString(), result[1].ToString(), false));
                     }
                 }
                 catch (NLua.Exceptions.LuaScriptException e)
